@@ -8,14 +8,6 @@ const Cast = lazy(() => import("../pages/Cast/Cast"));
 const Reviews = lazy(() => import("../pages/Reviews/Reviews"));
 const Home = lazy(() => import("../pages/Home/Home"));
 
-// import Home from "../pages/Home/Home";
-// import Movies from "../pages/Movies/Movies";
-// import MovieDetails from "../pages/MovieDetails/MovieDetails";
-// import Cast from "../pages/Cast/Cast";
-// import Reviews from "../pages/Reviews/Reviews";
-
-
-
 // const movieId = 550
 // const oneMovieFetch = `movie/${movieId}`;
 // fetchFunc(oneMovieFetch);
