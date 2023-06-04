@@ -10,9 +10,8 @@ const Cast = () => {
   useEffect(() => {
     fetchFunc(`movie/${movieId}/credits`)
     .then(({cast}) => {
-      // setCast(cast.map(({character, id, name, profile_path}) => { return {character, id, name, profile_path}}));
       setCast(cast);
-      console.log(cast)
+      // console.log(cast)
     })
   }, [movieId])
   
