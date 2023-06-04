@@ -23,7 +23,7 @@ useEffect(() => {
       setOverview(data.overview);
       setGenres(data.genres.map(genre => genre.name).join(', '));
       setRating(data.vote_average.toFixed(1));
-      console.log(data)
+      // console.log(data)
     })
     .catch(console.log)
 }, [movieId])
@@ -32,7 +32,7 @@ useEffect(() => {
     <>
     <div>
       <NavLink to={goBackPath}> Go back</NavLink>
-      <div><img src={poster} alt="poster" width='120'/></div>
+      <div><img src={poster} alt="poster" width='320'/></div>
       <div>
         <h2>{title}</h2>
         {rating && 
