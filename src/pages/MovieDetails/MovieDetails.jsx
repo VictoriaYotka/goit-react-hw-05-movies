@@ -19,10 +19,12 @@ useEffect(() => {
     fetchFunc(`/movie/${movieId}?append_to_response=poster_path`)
     .then((data) => {
       setTitle(data.title);
-      setPoster(`https://image.tmdb.org/t/p/w500${data.poster_path}`)
+      setPoster(data.poster_path !== null 
+        ?`https://image.tmdb.org/t/p/w500${data.poster_path}` 
+        : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb17OLPVxDbgiMnuuXiy3uJoJaUQRsGB6y8Q&usqp=CAU')
       setOverview(data.overview);
       setGenres(data.genres.map(genre => genre.name).join(', '));
-      setRating(data.vote_average.toFixed(1));
+      setRating(data.vote_average !== 0 ? data.vote_average.toFixed(1) : 0);
       // console.log(data)
     })
     .catch(console.log)
@@ -35,8 +37,9 @@ useEffect(() => {
       <div><img src={poster} alt="poster" width='320'/></div>
       <div>
         <h2>{title}</h2>
-        {rating && 
-        <p>Rating: {rating}</p>
+        {rating !== 0
+        ? <p>Rating: {rating}</p>
+        : null
       }
       {overview && 
       <>

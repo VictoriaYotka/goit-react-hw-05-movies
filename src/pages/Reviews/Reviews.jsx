@@ -15,14 +15,17 @@ const Reviews = () => {
     })
   }, [movieId])
 
-  return (
-    <ul>
+  
+    if(reviews.length !== 0)
+    {return (<ul>
       {reviews.map(({author, id, content}) => {return ( <li key={id}>
         <h5>Author: {author}</h5>
         <p>{content}</p>
       </li>)})}
-      </ul>
-  )
+      </ul>)} else {
+      return (<p>No reviews</p>)}
+    
+  
 }
 
 export default Reviews

@@ -15,6 +15,7 @@ const Cast = () => {
     })
   }, [movieId])
   
+  if(cast.length !== 0) {
   return (
     <ul>
       {cast.map(({character, id, name, profile_path}) => {return (<li key={id}>
@@ -27,6 +28,9 @@ const Cast = () => {
       </li>)})}
     </ul>
   )
+} else {
+  return (<p>No information</p>)
+}
 }
 
 export default Cast
