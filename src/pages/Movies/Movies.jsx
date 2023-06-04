@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 
 const Movies = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [query, setQuery] = useState(searchParams.get('search') ?? '');
   // const [isLoading, setIsLoading] = useState(false);
   const [films, setFilms] = useState([]);
+
+  const location = useLocation();
   
 useEffect(() => {
   if(query !== '') {
@@ -17,6 +21,9 @@ useEffect(() => {
     .catch(console.log)
     // .finally(setIsLoading(false))
   }}, [query])
+  //   const nextParams = query !== "" ? { search } : {};
+  //   setSearchParams(nextParams);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,6 +31,7 @@ useEffect(() => {
   
     if(query === '') return
   
+    setSearchParams({search: query})
     setQuery(query);
     event.target.reset();
   }
@@ -38,7 +46,7 @@ useEffect(() => {
     {/* {isLoading && <p>Loading...</p>} */}
 
     {films && <ul>
-      {films.map(({id, title}) => <li key={id}><NavLink>{title}</NavLink></li>)}
+      {films.map(({id, title}) => <li key={id}><NavLink to={`/movies/${id}`} state={{ from: location }}>{title}</NavLink></li>)}
       </ul>}
 
     </>

@@ -8,6 +8,7 @@ function fetchFunc (query) {
         if(!response.ok) {
             return Promise.reject(response.status)
         }
+        // console.log(response)
         return response.json(); 
     })
 }
