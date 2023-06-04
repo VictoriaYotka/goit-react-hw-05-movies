@@ -4,28 +4,35 @@ import fetchFunc from "components/services";
 
 const Reviews = () => {
   const {movieId} = useParams();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [reviews, setReviews] = useState([])
 
   useEffect(() => {
+    setIsLoading(true);
     fetchFunc(`movie/${movieId}/reviews`)
     .then(({results}) => {
       setReviews(results)
       // console.log(results)
     })
+    .catch(console.log)
+    .finally(() => setIsLoading(false))
   }, [movieId])
 
-  
-    if(reviews.length !== 0)
-    {return (<ul>
+  return (
+    <>
+    {isLoading && <p>Loading...</p>}
+    {reviews.length !== 0
+      ? <ul>
       {reviews.map(({author, id, content}) => {return ( <li key={id}>
         <h5>Author: {author}</h5>
         <p>{content}</p>
       </li>)})}
-      </ul>)} else {
-      return (<p>No reviews</p>)}
-    
+      </ul>
   
+    : <p>No information</p>
+    }
+    </>
+  )
 }
 
 export default Reviews

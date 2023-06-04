@@ -10,12 +10,13 @@ const [title, setTitle] = useState('');
 const [poster, setPoster] = useState('')
 const [overview, setOverview] = useState('');
 const [genres, setGenres] = useState('');
-const [rating, setRating] = useState('')
-
+const [rating, setRating] = useState('');
+const [isLoading, setIsLoading] = useState(false);
 const location = useLocation();
 const goBackPath =  location.state?.from ?? '/';
 
 useEffect(() => {
+  setIsLoading(true);
     fetchFunc(`/movie/${movieId}?append_to_response=poster_path`)
     .then((data) => {
       setTitle(data.title);
@@ -28,10 +29,12 @@ useEffect(() => {
       // console.log(data)
     })
     .catch(console.log)
+    .finally(() => setIsLoading(false))
 }, [movieId])
 
   return (
     <>
+    {isLoading && <p>Loading...</p>}
     <div>
       <NavLink to={goBackPath}> Go back</NavLink>
       <div><img src={poster} alt="poster" width='320'/></div>
