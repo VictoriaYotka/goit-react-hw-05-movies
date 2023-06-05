@@ -1,6 +1,7 @@
 import fetchFunc from "components/services"
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import css from './Home.module.css'
 
 const Home = () => {
   const [trends, setTrends] = useState([]);
@@ -10,16 +11,19 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchFunc('trending/all/day')
-    .then(({results}) => setTrends([...results]))
+    .then(({results}) => {
+      console.log(results);
+      setTrends([...results])})
     .catch(console.log)
     .finally(() => setIsLoading(false));
   }, [])
   
   return (
     <div>
+      <h2 className={css.title}>Popular today:</h2>
       {isLoading && <p>Loading...</p>}
       <ul>
-        {trends.map(({id, title}) => <li key={id}><NavLink to={`/movies/${id}`} state={{ from: location }}>{title}</NavLink></li>)}
+        {trends.map(({id, title, name}) => <li key={id} className='list_item'><NavLink to={`/movies/${id}`} state={{ from: location }} className='link'>{title ?? name}</NavLink></li>)}
       </ul>
     </div>
   )

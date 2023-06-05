@@ -1,5 +1,12 @@
 @import-normalize; /* bring in normalize.css styles */
 
+:root {
+  --main-font-color: #131a2b;
+  --logo-color: #068cdf;
+  --hover-color: #003754;
+  --active-color: #00c7ff;
+  --bg-color: #f2fcf4;
+}
 *,
 *:before,
 *:after {
@@ -13,6 +20,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--main-font-color);
+}
+
+.active {
+  text-decoration: underline;
+  color: var(--active-color);
+}
+
+.list_item:not(:last-of-type) {
+  margin-bottom: 12px;
+}
+
+.list_item:hover {
+  scale: 110%;
+  transform-origin: left;
+  color: var(--hover-color);
+}
+
+.link:visited {
+  color: var(--logo-color);
 }
 
 /* RESET */
@@ -45,9 +73,4 @@ ul {
 a {
   color: currentColor;
   text-decoration: none;
-}
-
-.active {
-  text-decoration: underline;
-  color: rgb(18, 18, 118);
 }

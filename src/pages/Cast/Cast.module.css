@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  gap: 24px;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.item {
+  justify-content: baseline;
+}
+.name_wrapper {
+  width: 120px;
+}

@@ -1,0 +1,50 @@
+.button {
+  cursor: pointer;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--logo-color);
+}
+
+.button:hover {
+  scale: 110%;
+  transform-origin: left;
+}
+
+.wrapper {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--logo-color);
+}
+
+.rating {
+  color: var(--logo-color);
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.descr {
+  margin-bottom: 8px;
+}
+
+.list {
+  list-style: inside;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+.link {
+  font-weight: 700;
+}
+
+.link:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.link:hover {
+  scale: 110%;
+  transform-origin: left;
+  color: var(--logo-color);
+}
