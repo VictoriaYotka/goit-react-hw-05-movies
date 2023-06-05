@@ -20,17 +20,17 @@ const Reviews = () => {
 
   return (
     <>
-    {isLoading && <p>Loading...</p>}
-    {reviews.length !== 0
-      ? <ul>
-      {reviews.map(({author, id, content}) => {return ( <li key={id}>
-        <h5>Author: {author}</h5>
-        <p>{content}</p>
-      </li>)})}
-      </ul>
-  
-    : <p>No information</p>
-    }
+      {isLoading && <p>Loading...</p>}
+      {reviews.length !== 0
+        ? <ul>
+            {reviews.map(({author, id, content}) => {return ( <li key={id}>
+              <h5>Author: {author}</h5>
+              <p>{content}</p>
+            </li>)})}
+          </ul>
+    
+        : <p>No information</p>
+      }
     </>
   )
 }

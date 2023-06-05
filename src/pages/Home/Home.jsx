@@ -9,10 +9,10 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-   fetchFunc('trending/all/day')
-  .then(({results}) => setTrends([...results]))
-  .catch(console.log)
-  .finally(() => setIsLoading(false));
+    fetchFunc('trending/all/day')
+    .then(({results}) => setTrends([...results]))
+    .catch(console.log)
+    .finally(() => setIsLoading(false));
   }, [])
   
   return (

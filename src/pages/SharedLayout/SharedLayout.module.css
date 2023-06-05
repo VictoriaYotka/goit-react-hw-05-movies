@@ -1,0 +1,30 @@
+.container {
+  padding: 0 32px 32px 32px;
+}
+
+.nav_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgb(0, 92, 138);
+}
+
+.logo {
+  padding: 16px 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.logo_part {
+  color: rgb(0, 92, 138);
+}
+
+.link {
+  padding: 16px 0;
+  font-weight: 700;
+}
+
+.link:hover {
+  scale: 110%;
+}

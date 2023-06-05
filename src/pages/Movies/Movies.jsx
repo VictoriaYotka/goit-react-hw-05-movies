@@ -4,7 +4,6 @@ import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [query, setQuery] = useState(searchParams.get('search') ?? '');
   const [isLoading, setIsLoading] = useState(false);
   const [films, setFilms] = useState([]);
@@ -36,19 +35,16 @@ useEffect(() => {
   }
 
   return (
-    <>
-    <form onSubmit={handleSubmit}>
-      <input name="film" type="text" autoFocus />
-      <button type="submit">Search</button>
-    </form>
-
-    {isLoading && <p>Loading...</p>}
-
-    {films && <ul>
-      {films.map(({id, title}) => <li key={id}><NavLink to={`/movies/${id}`} state={{ from: location }}>{title}</NavLink></li>)}
-      </ul>}
-
-    </>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input name="film" type="text" autoFocus />
+        <button type="submit">Search</button>
+      </form>
+      {isLoading && <p>Loading...</p>}
+      {films && <ul>
+        {films.map(({id, title}) => <li key={id}><NavLink to={`/movies/${id}`} state={{ from: location }}>{title}</NavLink></li>)}
+        </ul>}
+    </div>
   )
 }
 
