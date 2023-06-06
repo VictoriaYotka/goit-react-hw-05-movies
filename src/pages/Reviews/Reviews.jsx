@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import fetchFunc from "components/services";
 import css from './Reviews.module.css'
 import Loading from "components/Loading/Loading";
+import Error from "components/Error/Error";
 import List from "components/List/List";
 
 const Reviews = () => {
@@ -32,7 +33,7 @@ const Reviews = () => {
   return (
     <>
       {isLoading && <Loading/>}
-      {error && <p>Oops, something went wrong. Try again!</p>}
+      {error && <Error/>}
       {reviews.length !== 0
         ? <List children={reviewsList}/>
         : <p>No information</p>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import css from './MovieDetails.module.css'
 import Loading from "components/Loading/Loading";
+import Error from "components/Error/Error";
 import MovieInfo from "components/MovieInfo/MovieInfo";
 import MovieInfoSeeMore from "components/MovieInfoSeeMore/MovieInfoSeeMore";
 
@@ -43,7 +44,7 @@ const MovieDetails = () => {
       <Link to={goBackPath} className={css.button}>← Go back</Link>
       
       {isLoading && <Loading/>}
-      {error && <p>Oops, something went wrong. Try again!</p>}
+      {error && <Error/>}
       
       <MovieInfo 
         poster={poster} title={title} rating={rating} overview={overview} genres={genres}

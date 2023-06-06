@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import css from './Home.module.css'
 import Loading from "components/Loading/Loading";
 import List from "components/List/List";
+import Error from "components/Error/Error";
 
 const Home = () => {
   const [trends, setTrends] = useState([]);
@@ -30,7 +31,7 @@ const Home = () => {
     <div>
       <h2 className={css.title}>Popular today:</h2>
       {isLoading && <Loading/>}
-      {error && <p>Oops, something went wrong. Try again!</p>}
+      {error && <Error/>}
       <List children={trendsList}/>
     </div>
   )

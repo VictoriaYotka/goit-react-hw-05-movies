@@ -3,6 +3,7 @@ import fetchFunc from "components/services";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import Loading from "components/Loading/Loading";
 import List from "components/List/List";
+import Error from "components/Error/Error";
 import SearchForm from "components/SearchForm/SearchForm";
 
 const Movies = () => {
@@ -44,7 +45,7 @@ useEffect(() => {
     <div>
       <SearchForm handleSubmit={handleSubmit}/>
       {isLoading && <Loading/>}
-      {error && <p>Oops, something went wrong. Try again!</p>}
+      {error && <Error/>}
       {movies && <List children={moviesList}/> }
       {movies.length === 0 && query !== '' && !error &&
         <p>We've found nothing. Try another query!</p>}

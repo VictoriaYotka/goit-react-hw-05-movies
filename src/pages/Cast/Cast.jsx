@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import css from './Cast.module.css'
 import Loading from "components/Loading/Loading";
+import Error from "components/Error/Error";
 import List from "components/List/List";
 
 const Cast = () => {
@@ -39,7 +40,7 @@ const Cast = () => {
 return (
   <>
     {isLoading && <Loading/>}
-    {error && <p>Oops, something went wrong. Try again!</p>}
+    {error && <Error/>}
     {cast.length !== 0
       ? <List children={castList} className={css.list}/>
       : <p>No information</p>
