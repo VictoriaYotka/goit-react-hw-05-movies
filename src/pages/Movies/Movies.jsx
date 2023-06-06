@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import css from './Movies.module.css'
+import Loading from "components/Loading/Loading";
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +42,7 @@ useEffect(() => {
         <input name="film" type="text" autoFocus placeholder="Movie title" className={css.input}/>
         <button type="submit" className={css.button}>Search</button>
       </form>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loading/>}
       {films && <ul>
         {films.map(({id, title}) => <li key={id} className='list_item'><NavLink to={`/movies/${id}`} state={{ from: location }} className='link'>{title}</NavLink></li>)}
         </ul>}

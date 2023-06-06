@@ -3,6 +3,7 @@ import { Suspense, useRef } from "react";
 import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import css from './MovieDetails.module.css'
+import Loading from "components/Loading/Loading";
 
 const MovieDetails = () => {
   const {movieId} = useParams();
@@ -36,7 +37,7 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to={goBackPath} className={css.button}>← Go back</Link>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loading/>}
       <div className={css.wrapper}>
         <div>
           <img src={poster} alt="poster" width='320'/>
