@@ -9,15 +9,17 @@ const Cast = () => {
   const {movieId} = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
+    setError(false);
     fetchFunc(`movie/${movieId}/credits`)
     .then(({cast}) => {
       setCast(cast);
       // console.log(cast)
     })
-    .catch(console.log)
+    .catch(() => setError(true))
     .finally(() => setIsLoading(false));
   }, [movieId])
 
@@ -37,6 +39,7 @@ const Cast = () => {
 return (
   <>
     {isLoading && <Loading/>}
+    {error && <p>Oops, something went wrong. Try again!</p>}
     {cast.length !== 0
       ? <List children={castList} className={css.list}/>
       : <p>No information</p>

@@ -15,12 +15,14 @@ const MovieDetails = () => {
   const [genres, setGenres] = useState('');
   const [rating, setRating] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const location = useRef(useLocation());
   const goBackPath =  location.current.state?.from ?? '/';
 
 
   useEffect(() => {
       setIsLoading(true);
+      setError(false);
       fetchFunc(`/movie/${movieId}?append_to_response=poster_path`)
       .then((data) => {
         setTitle(data.title);
@@ -32,7 +34,7 @@ const MovieDetails = () => {
         setRating(data.vote_average !== 0 ? data.vote_average.toFixed(1) : 0);
         // console.log(data)
       })
-      .catch(console.log)
+      .catch(() => setError(true))
       .finally(() => setIsLoading(false));
   }, [movieId])
 
@@ -41,6 +43,7 @@ const MovieDetails = () => {
       <Link to={goBackPath} className={css.button}>← Go back</Link>
       
       {isLoading && <Loading/>}
+      {error && <p>Oops, something went wrong. Try again!</p>}
       
       <MovieInfo 
         poster={poster} title={title} rating={rating} overview={overview} genres={genres}

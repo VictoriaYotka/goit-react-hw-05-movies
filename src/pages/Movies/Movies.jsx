@@ -9,17 +9,19 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('search') ?? '');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
   const location = useLocation();
   
 useEffect(() => {
   if(query !== '') {
     setIsLoading(true);
+    setError(false);
     fetchFunc(`search/movie?query=${query}`)
     .then(({results}) => {
       setMovies([...results])
     })
-    .catch(console.log)
+    .catch(() => setError(true))
     .finally(() => setIsLoading(false))
   }}, [query])
 
@@ -42,8 +44,9 @@ useEffect(() => {
     <div>
       <SearchForm handleSubmit={handleSubmit}/>
       {isLoading && <Loading/>}
+      {error && <p>Oops, something went wrong. Try again!</p>}
       {movies && <List children={moviesList}/> }
-      {movies.length === 0 && query !== '' &&
+      {movies.length === 0 && query !== '' && !error &&
         <p>We've found nothing. Try another query!</p>}
     </div>
   )

@@ -8,16 +8,18 @@ import List from "components/List/List";
 const Reviews = () => {
   const {movieId} = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     setIsLoading(true);
+    setError(false);
     fetchFunc(`movie/${movieId}/reviews`)
     .then(({results}) => {
       setReviews(results)
       // console.log(results)
     })
-    .catch(console.log)
+    .catch(() => setError(true))
     .finally(() => setIsLoading(false))
   }, [movieId])
 
@@ -30,6 +32,7 @@ const Reviews = () => {
   return (
     <>
       {isLoading && <Loading/>}
+      {error && <p>Oops, something went wrong. Try again!</p>}
       {reviews.length !== 0
         ? <List children={reviewsList}/>
         : <p>No information</p>

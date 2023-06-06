@@ -8,15 +8,17 @@ import List from "components/List/List";
 const Home = () => {
   const [trends, setTrends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setIsLoading(true);
+    setError(false);
     fetchFunc('trending/all/day')
     .then(({results}) => {
       // console.log(results);
       setTrends([...results])})
-    .catch(console.log)
+    .catch(() => setError(true))
     .finally(() => setIsLoading(false));
   }, [])
 
@@ -28,6 +30,7 @@ const Home = () => {
     <div>
       <h2 className={css.title}>Popular today:</h2>
       {isLoading && <Loading/>}
+      {error && <p>Oops, something went wrong. Try again!</p>}
       <List children={trendsList}/>
     </div>
   )
