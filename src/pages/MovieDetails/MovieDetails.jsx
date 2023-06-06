@@ -1,9 +1,11 @@
-import { Outlet, NavLink, Link, useParams, useLocation } from "react-router-dom"
+import { Outlet, Link, useParams, useLocation } from "react-router-dom"
 import { Suspense, useRef } from "react";
 import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import css from './MovieDetails.module.css'
 import Loading from "components/Loading/Loading";
+import MovieInfo from "components/MovieInfo/MovieInfo";
+import MovieInfoSeeMore from "components/MovieInfoSeeMore/MovieInfoSeeMore";
 
 const MovieDetails = () => {
   const {movieId} = useParams();
@@ -37,33 +39,16 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to={goBackPath} className={css.button}>← Go back</Link>
+      
       {isLoading && <Loading/>}
-      <div className={css.wrapper}>
-        <div>
-          <img src={poster} alt="poster" width='320'/>
-        </div>
-        <div>
-          <h2 className={css.title}>{title}</h2>
-          {rating !== 0
-          ? <h5 className={css.rating}>Rating: {rating} / 10</h5>
-          : null
-          }
-          {overview && <>
-            <h4>Overview</h4>
-            <p className={css.descr}>{overview}</p>
-            </>}
-          {genres && <>
-            <h4>Genres</h4>
-            <p>{genres}</p>
-            </>}
-        </div>
-      </div>
-      <h4>See more:</h4>
-      <ul className={css.list}>
-        <li className={css.link}><NavLink to="cast" >Cast</NavLink></li>
-        <li className={css.link}><NavLink to="reviews" >Reviews</NavLink></li>
-      </ul>
-      <Suspense fallback={<div>Loading...</div>}>
+      
+      <MovieInfo 
+        poster={poster} title={title} rating={rating} overview={overview} genres={genres}
+      />
+
+      <MovieInfoSeeMore />
+
+      <Suspense fallback={<Loading/>}>
         <Outlet />
       </Suspense>
     </div>

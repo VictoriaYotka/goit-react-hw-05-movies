@@ -1,31 +1,3 @@
 .container {
   padding: 0 32px 32px 32px;
 }
-
-.nav_wrapper {
-  display: flex;
-  align-items: center;
-  gap: 64px;
-  margin-bottom: 32px;
-  border-bottom: 2px solid var(--logo-color);
-}
-
-.logo {
-  padding: 16px 0;
-  font-size: 32px;
-  font-weight: 700;
-  text-shadow: 3px 1px 3px var(--active-color);
-  letter-spacing: 1.1px;
-}
-
-.logo_part {
-  color: var(--logo-color);
-}
-
-.link {
-  font-weight: 700;
-}
-
-.link:hover {
-  scale: 110%;
-}

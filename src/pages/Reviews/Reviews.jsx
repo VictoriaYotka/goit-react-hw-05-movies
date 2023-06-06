@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import fetchFunc from "components/services";
 import css from './Reviews.module.css'
+import Loading from "components/Loading/Loading";
+import List from "components/List/List";
 
 const Reviews = () => {
   const {movieId} = useParams();
@@ -19,17 +21,17 @@ const Reviews = () => {
     .finally(() => setIsLoading(false))
   }, [movieId])
 
+  const reviewsList = reviews.map(({author, id, content}) => {return ( 
+    <li key={id} className={css.item}>
+      <h5>Author: {author}</h5>
+      <p>{content}</p>
+    </li>)})
+
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loading/>}
       {reviews.length !== 0
-        ? <ul>
-            {reviews.map(({author, id, content}) => {return ( 
-            <li key={id} className={css.item}>
-              <h5>Author: {author}</h5>
-              <p>{content}</p>
-            </li>)})}
-          </ul>
+        ? <List children={reviewsList}/>
     
         : <p>No information</p>
       }

@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--logo-color);
+}
+
+.rating {
+  color: var(--logo-color);
+  margin-top: 8px;
+  margin-bottom: 16px;
+}

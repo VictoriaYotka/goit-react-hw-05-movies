@@ -1,0 +1,18 @@
+.list {
+  list-style: inside;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+.link {
+  font-weight: 700;
+}
+
+.link:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.link:hover {
+  scale: 110%;
+  transform-origin: left;
+  color: var(--logo-color);
+}

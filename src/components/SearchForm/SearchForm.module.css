@@ -21,6 +21,5 @@
   padding: 8px 16px;
   font-size: 16px;
   border-radius: 6px;
-  background: var(--group-background);
   border: 1px solid var(--logo-color);
 }

@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import { NavLink, useLocation, useSearchParams } from "react-router-dom";
-import css from './Movies.module.css'
 import Loading from "components/Loading/Loading";
+import List from "components/List/List";
+import SearchForm from "components/SearchForm/SearchForm";
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('search') ?? '');
   const [isLoading, setIsLoading] = useState(false);
-  const [films, setFilms] = useState([]);
+  const [movies, setMovies] = useState([]);
   const location = useLocation();
   
 useEffect(() => {
@@ -16,18 +17,15 @@ useEffect(() => {
     setIsLoading(true);
     fetchFunc(`search/movie?query=${query}`)
     .then(({results}) => {
-      setFilms([...results])
+      setMovies([...results])
       if(results.length === 0) alert("We've found nothing. Try another query!")})
     .catch(console.log)
     .finally(() => setIsLoading(false))
   }}, [query])
-  //   const nextParams = query !== "" ? { search } : {};
-  //   setSearchParams(nextParams);
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const query = event.target.elements.film.value.trim();
+    const query = event.target.elements.movie.value.trim();
   
     if(query === '') return
   
@@ -36,16 +34,15 @@ useEffect(() => {
     event.target.reset();
   }
 
+  const moviesList = movies.map(({id, title}) => <li key={id} className='list_item'>
+    <NavLink to={`/movies/${id}`} state={{ from: location }} className='link'>{title}</NavLink>
+    </li>);
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input name="film" type="text" autoFocus placeholder="Movie title" className={css.input}/>
-        <button type="submit" className={css.button}>Search</button>
-      </form>
+      <SearchForm handleSubmit={handleSubmit}/>
       {isLoading && <Loading/>}
-      {films && <ul>
-        {films.map(({id, title}) => <li key={id} className='list_item'><NavLink to={`/movies/${id}`} state={{ from: location }} className='link'>{title}</NavLink></li>)}
-        </ul>}
+      {movies && <List children={moviesList}/>}
     </div>
   )
 }
