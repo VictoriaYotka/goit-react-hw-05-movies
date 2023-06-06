@@ -18,7 +18,7 @@ useEffect(() => {
     fetchFunc(`search/movie?query=${query}`)
     .then(({results}) => {
       setMovies([...results])
-      if(results.length === 0) alert("We've found nothing. Try another query!")})
+    })
     .catch(console.log)
     .finally(() => setIsLoading(false))
   }}, [query])
@@ -42,7 +42,9 @@ useEffect(() => {
     <div>
       <SearchForm handleSubmit={handleSubmit}/>
       {isLoading && <Loading/>}
-      {movies && <List children={moviesList}/>}
+      {movies && <List children={moviesList}/> }
+      {movies.length === 0 && query !== '' &&
+        <p>We've found nothing. Try another query!</p>}
     </div>
   )
 }

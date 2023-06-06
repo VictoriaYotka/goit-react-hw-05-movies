@@ -32,7 +32,6 @@ const Reviews = () => {
       {isLoading && <Loading/>}
       {reviews.length !== 0
         ? <List children={reviewsList}/>
-    
         : <p>No information</p>
       }
     </>

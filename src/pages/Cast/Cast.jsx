@@ -39,7 +39,6 @@ return (
     {isLoading && <Loading/>}
     {cast.length !== 0
       ? <List children={castList} className={css.list}/>
-
       : <p>No information</p>
     }
   </>
