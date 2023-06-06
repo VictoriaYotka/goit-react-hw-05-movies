@@ -1,5 +1,5 @@
 import { Outlet, NavLink, Link, useParams, useLocation } from "react-router-dom"
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { useState, useEffect } from "react";
 import fetchFunc from "components/services";
 import css from './MovieDetails.module.css'
@@ -12,8 +12,9 @@ const MovieDetails = () => {
   const [genres, setGenres] = useState('');
   const [rating, setRating] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
-  const goBackPath =  location.state?.from ?? '/';
+  const location = useRef(useLocation());
+  const goBackPath =  location.current.state?.from ?? '/';
+
 
   useEffect(() => {
       setIsLoading(true);
@@ -29,7 +30,7 @@ const MovieDetails = () => {
         // console.log(data)
       })
       .catch(console.log)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false));
   }, [movieId])
 
   return (
